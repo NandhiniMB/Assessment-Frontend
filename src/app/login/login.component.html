@@ -1,0 +1,54 @@
+
+<mat-toolbar color="primary">
+    <span>Internal Portal</span>
+    <span class="example-spacer"></span>
+    <span class="register" (click) = "registerUser()">
+      Register
+    </span>
+</mat-toolbar>
+
+<div class="container" align = "center">
+  <br><br>
+
+<h1>Login</h1>
+
+<!-- <div>
+    <form action="">
+        <label for="">Enter Email Id</label>
+        <input type="text" placeholder="Email Id">
+        <br>
+        <label for="">Enter Password</label>
+        <input type="password" placeholder="Password">
+    </form>
+</div> -->
+
+<form #loginform="ngForm" class="example-form" (ngSubmit) = "loginUser()">
+    <small style="color: red;">{{message}}</small>
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com" name = "email" [(ngModel)] = "user.email" required>
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput name="password" [(ngModel)] = "user.password"  required>
+        <mat-error *ngIf="!passwordFormControl.hasError('required')">
+          Please enter the password
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <br><br>
+    <button type="submit" mat-raised-button color="primary">Login</button>
+</form>
+<br>
+<span class="register" (click) = "registerUser()">New User? <strong>Register Now</strong></span><br><br>
+<span class="register" (click) = "openDialog()"><strong>Forgot Password ?</strong></span>
+</div>

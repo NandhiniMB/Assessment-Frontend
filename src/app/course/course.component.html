@@ -1,0 +1,22 @@
+<button style="margin-left:50px; margin-top:10px; font-size: 1.5em;" mat-stroked-button color="primary">Courses</button>
+  <mat-grid-list cols="3" rowHeight="3:2">
+    <mat-grid-tile *ngFor="let course of courses; let i = index">
+        <mat-card  class="example-card">
+               
+                <mat-card-title>Course </mat-card-title>
+                <br>
+                <mat-card-subtitle>Name: {{course.name}}</mat-card-subtitle>
+                <mat-card-subtitle>Description :{{course.description}}</mat-card-subtitle>
+                
+                   
+                <mat-card-action><button  mat-raised-button color="accent" (click)=assessments(course.id)  >
+                  <span class="material-icons">create
+                   
+                  </span>Assessment</button>
+              </mat-card-action>
+            
+           
+            
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>

@@ -1,0 +1,72 @@
+<button  mat-raised-button color="accent" class="create"  (click) = "createProject('add',{})">
+    <span class="material-icons">
+    create
+    </span> Create Project</button>
+
+
+    <table mat-table [dataSource]="projects" class="mat-elevation-z8" >
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <!-- <div *matCellDef="let element1">-->
+          <!-- <div *ngIf = "element1.status == 'approved'">  -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef><strong> No. </strong> </th>
+          <td mat-cell *matCellDef="let element; let i = index;"> <strong>{{i+1}}</strong></td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef><strong> Title </strong></th>
+          <td mat-cell *matCellDef="let element"> <strong>{{element.name}} </strong></td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef><strong> Descripton </strong></th>
+            <td mat-cell *matCellDef="let element"> <strong>{{element.description}} </strong></td>
+          </ng-container>
+      
+        
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="createdOn">
+          <th mat-header-cell *matHeaderCellDef><strong> Created On </strong></th>
+          <td mat-cell *matCellDef="let element">{{element.createdOn| date}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="creator">
+          <th mat-header-cell *matHeaderCellDef><strong> Uploaded By </strong></th>
+          <td mat-cell *matCellDef="let element">{{element.creator.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="participants">
+          <th mat-header-cell *matHeaderCellDef><strong>participants</strong></th>
+          <td mat-cell *matCellDef="let element"><button mat-button color="primary" [routerLink]="['/home/partpro',element.id]">
+            View participants
+          </button> </td>
+        </ng-container>
+    
+      
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef><strong>Edit</strong></th>
+          <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click) = "onEdit('edit',element)">
+            <span class="material-icons">
+             edit
+            </span> </button> </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef><strong>Delete</strong></th>
+          <td mat-cell *matCellDef="let element"><button mat-raised-button color="warn" (click)="onDelete(element.id)">
+            <span class="material-icons">
+             delete
+            </span></button> </td>
+        </ng-container>
+      
+       
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>

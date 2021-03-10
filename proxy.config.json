@@ -1,0 +1,45 @@
+{
+    "/admin": {
+      "target": "http://localhost:8080/",
+      "secure": false
+    },
+
+    "/login": {
+        "target": "http://localhost:8080",
+        "secure": false
+    },
+
+    "/register": {
+        "target": "http://localhost:8080/",
+        "secure": false
+    },
+    "/course": {
+        "target": "http://localhost:8080/",
+        "secure": false
+    },
+    "/mcq/save": {
+        "target": "http://localhost:8080/",
+        "secure": false
+    },
+    "/mcq/": {
+        "target": "http://localhost:8080/",
+        "secure": false
+    },
+    "/usermcq": {
+        "target": "http://localhost:8080/",
+        "secure": false
+    },
+    "/project": {
+        "target": "http://localhost:8080/",
+        "secure": false
+    },
+    "/userproject": {
+        "target": "http://localhost:8080/",
+        "secure": false
+    }
+
+
+    
+
+
+}

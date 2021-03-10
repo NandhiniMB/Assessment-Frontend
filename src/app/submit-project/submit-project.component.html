@@ -1,0 +1,16 @@
+<h1>
+  <button mat-stroked-button color="primary">Project : {{project.name}}</button>
+    <span style="float: right;  cursor: pointer;" mat-dialog-close class="material-icons">
+    close
+    </span>
+  
+</h1>
+<form #myfileForm="ngForm">
+  
+      <input style="margin-top:10px" type="file" name="file"  #myfile (change)="onFileChanged($event)"> 
+
+    <br>
+    <br>
+        <button style="margin-top:10px; margin-left: 180px;" mat-stroked-button color="primary" (click)="onUpload()"  >Upload</button>
+    
+</form>

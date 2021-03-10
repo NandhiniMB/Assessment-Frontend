@@ -1,0 +1,35 @@
+<div style="justify-content: center; text-align: center;margin-top:20px">
+  <button style=" font-size: 1.5em;" mat-stroked-button color="primary">MCQ Assessment</button><br>
+
+     <p>{{mcq.name}}</p>
+
+</div>
+ 
+
+  <mat-vertical-stepper [linear]="true" #stepper>
+    <ng-container *ngFor="let q of question; let ind=index">
+      <mat-step  >
+        <form [formGroup]="answer">
+          <ng-template matStepLabel>{{q.question}}</ng-template>
+          
+            <mat-radio-group aria-label="Select an option" formControlName="answerCtrl">
+              <mat-radio-button value="option1">{{q.option1}}</mat-radio-button><p> </p>
+              <mat-radio-button value="option2">{{q.option2}}</mat-radio-button>
+            </mat-radio-group>
+         
+          <div>
+            <p></p>
+            <button mat-button matStepperNext color="primary" [disabled]="answer.pristine" (click)=saveAnswer(ind,$event)>Save</button>
+          </div>
+        </form>
+      </mat-step>
+      </ng-container>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button (click)="saveAll()">Submit</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>

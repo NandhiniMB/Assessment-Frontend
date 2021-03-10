@@ -1,0 +1,36 @@
+<button style="margin-left:50px; margin-top:10px; font-size: 1.5em;" mat-stroked-button color="primary">Assessments - MCQ</button><mat-grid-list cols="3" rowHeight="3:2">
+    <mat-grid-tile *ngFor="let m of mcq; let i = index">
+        <mat-card  class="example-card">
+               
+                <mat-card-title>{{m.name}}</mat-card-title>
+                <br>
+                <mat-card-subtitle>Type: MCQ </mat-card-subtitle>
+                <mat-card-subtitle>Course: {{m.course.name}} </mat-card-subtitle>
+                <mat-card-subtitle>Creator : {{m.creator.name}} </mat-card-subtitle>
+                 <mat-card-action><button  mat-raised-button color="accent" (click) = takeAssessment(m.id)>
+                    <span class="material-icons">
+                        computer
+                    </span> Take Assessment</button>
+                </mat-card-action>   
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <button style="margin-left:50px; margin-top:10px; font-size: 1.5em;" mat-stroked-button color="primary">Assessments - Project</button><mat-grid-list cols="3" rowHeight="3:2">
+        <mat-grid-tile *ngFor="let p of projects; let i = index">
+            <mat-card  class="example-card">
+                   
+                    <mat-card-title>{{p.name}}</mat-card-title>
+                    <br>
+                    <mat-card-subtitle>Description: <button  mat-button color="accent" (click) = "viewDesc(p)">
+                         view </button>  </mat-card-subtitle>
+                    <mat-card-subtitle>Course: {{p.course.name}} </mat-card-subtitle>
+                    <mat-card-subtitle>Creator : {{p.creator.name}} </mat-card-subtitle>
+                     <mat-card-action><button  mat-raised-button color="accent" (click) = "submitProject(p)">
+                        <span class="material-icons">
+                            computer
+                        </span> Submit Project</button>
+                    </mat-card-action>   
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>

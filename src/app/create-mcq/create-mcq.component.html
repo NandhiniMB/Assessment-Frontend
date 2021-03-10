@@ -1,0 +1,64 @@
+
+
+<form novalidate #mainForm="ngForm" >
+
+<div style="justify-content: center; text-align: center;margin-top:20px">
+    <button style=" font-size: 1.5em;" mat-stroked-button color="primary">MCQ Assessment</button><br>
+     <mat-form-field >
+       
+        <mat-label>Test Name </mat-label>
+        <input matInput placeholder="Angular part1" name="title" [(ngModel)]="mcqObj.name" #title = "ngModel" required>
+        <!-- <mat-error *ngIf="title.errors?.required">Enter Test Name</mat-error> -->
+        </mat-form-field>
+     
+        <mat-form-field>
+          <mat-label>No Of Questions</mat-label>
+          <mat-select (selectionChange)="onChange($event)" name="noOfQuestions"   >
+            <mat-option *ngFor="let i of [].constructor(20) let ind=index" value={{ind}}>{{ind+1}}</mat-option>   
+          </mat-select>
+        </mat-form-field>
+
+</div>
+
+
+<mat-vertical-stepper [linear]="true" #stepper>
+  <ng-container *ngFor="let i of [].constructor(noOfQuestions) let ind=index">
+    <mat-step [stepControl]="question[ind]">
+      <form [formGroup]="question[ind]">
+        <ng-template matStepLabel>Question {{ind+1}} </ng-template>
+        <mat-form-field>
+          <mat-label>Question</mat-label>
+          <input matInput placeholder="What is *ngIf " formControlName="question"  required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Option 1</mat-label>
+          <input matInput placeholder="Structural Directive " formControlName="option1" required >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Option 2</mat-label>
+          <input matInput placeholder="Attribute Directive " formControlName="option2"  required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Correct Answer</mat-label>
+          <mat-select formControlName="answer" >
+            <span *ngIf="question[ind].get('option1').value && question[ind].get('option2').value" >
+            <mat-option [value]="question[ind].get('option1').value">{{question[ind].get('option1').value}}</mat-option>
+            <mat-option [value]="question[ind].get('option2').value">{{question[ind].get('option2').value}}</mat-option>
+         </span> </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext color="primary" [disabled]="question[ind].invalid" (click)=addQuestion(ind)>Save</button>
+        </div>
+      </form>
+    </mat-step>
+    </ng-container>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button color="primary" [disabled]="mainForm.invalid" (click)="saveAll()">Save All</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</form>

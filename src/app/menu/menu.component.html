@@ -1,0 +1,96 @@
+<div class="menu">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <button mat-icon-button>
+          <mat-icon  (click)="sidenav.toggle()">menu</mat-icon>
+        </button>
+        <h1>  Internal Portal</h1>
+     
+    
+        <span class="example-spacer"></span>
+        <!-- <div class = "notify_icon">
+            <button mat-button  (click)="openNotificationDialog()">
+               <mat-icon  [matBadge]="notifications_count" matBadgeColor="white" >circle_notifications</mat-icon>
+              </button>
+           
+        </div> -->
+        <div class="user_icon">
+            <mat-select-trigger>
+              <mat-icon>account_circle</mat-icon>
+              <mat-select>
+                <!-- <mat-option>{{user.name}}</mat-option> -->
+                <mat-option (click) = "logoutUser()">Log Out</mat-option>
+              </mat-select>
+            </mat-select-trigger>
+          </div>
+      </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
+    
+    
+    <mat-sidenav-container>
+      <mat-sidenav #sidenav>
+        <mat-nav-list>
+    
+         
+    
+    <mat-nav-list class="list-container">
+      <a mat-list-item routerLink="/home" routerLinkActive="active-link" (click)="sidenav.toggle()">
+        <!-- <span class="material-icons">Home</span> -->
+        <a mat-list-item> Home </a>
+      </a> 
+    </mat-nav-list>
+    <mat-nav-list class="list-container">
+      <a mat-list-item [routerLink]="['/home/course']" (click)="sidenav.toggle()">
+        <!-- <span class="material-icons">Course</span> -->
+        <a mat-list-item >Course </a>
+      </a> 
+    </mat-nav-list>
+    <mat-nav-list class="list-container">
+      <a mat-list-item [routerLink]="['/home/grad']" (click)="sidenav.toggle()">
+        <!-- <span class="material-icons">Grads</span> -->
+        <a mat-list-item >Grads</a>
+      </a> 
+    </mat-nav-list>
+     <mat-nav-list class="list-container">
+      <a mat-list-item  [routerLink]="['/home/score']" (click)="sidenav.toggle()" routerLinkActive="active-link">
+        <span class="material-icons">score</span>
+        <a mat-list-item > My Score Card </a>
+      </a> 
+    </mat-nav-list>
+
+          
+         
+    
+          <!-- <ng-container *ngFor="let admin of admins; index as i; first as isFirst">
+        
+              <mat-nav-list *ngIf="(user.email == admin)" class="list-container">
+              <a mat-list-item  [routerLink]="['/home/maintain']" (click)="sidenav.toggle()">
+                <span class="material-icons">video_settings</span>
+                <a mat-list-item > Manage Video </a>
+              </a> 
+            </mat-nav-list>
+            <mat-nav-list class="list-container">
+              <a mat-list-item *ngIf="(user.email == admin)" [routerLink]="['/home/categories']" (click)="sidenav.toggle()">
+                <span class="material-icons">category</span>
+                <a mat-list-item>Manage Categories </a>
+              </a> 
+            </mat-nav-list>
+          </ng-container> -->
+         
+    
+        </mat-nav-list>
+      </mat-sidenav>
+      
+      <mat-sidenav-content style="height: 88vh;">
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+     
+    </mat-sidenav-container>
+    <!-- 
+    <div fxLayout="row" fxFlex="100">
+     <app-sidebar fxLayout="column" fxFlex="300px"></app-sidebar>
+     
+    </div> -->
