@@ -26,7 +26,7 @@ export class McqComponent implements OnInit {
       console.log(resp)
       this.mcq=resp.filter(m => {
         
-       return (m.creator.id==JSON.parse(this.userService.getUser()).id);
+       return (m.creator.id==JSON.parse(this.userService.getUser()).id && m.course.id == this.course.id );
       })
       console.log(this.mcq);
     })

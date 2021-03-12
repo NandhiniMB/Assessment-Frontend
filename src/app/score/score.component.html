@@ -1,4 +1,4 @@
-<button style="margin-left:50px; margin-top:10px; font-size: 1.5em;" mat-stroked-button color="primary">Score Card</button>
+<button style="margin-left:50px; margin-top:10px; font-size: 1.5em;" mat-stroked-button color="primary">Score Card - MCQ</button>
   <mat-grid-list cols="3" rowHeight="3:2">
     <mat-grid-tile *ngFor="let u of user_mcq_list; let i = index">
         <mat-card  class="example-card">
@@ -21,3 +21,29 @@
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
+    <p *ngIf="user_mcq_list.length == 0">Not available</p>
+
+    <button style="margin-left:50px; margin-top:10px; font-size: 1.5em;" mat-stroked-button color="primary">Score Card - Project</button>
+    <mat-grid-list cols="3" rowHeight="3:2">
+      <mat-grid-tile *ngFor="let u of user_project_list; let i = index">
+          <mat-card  class="example-card">
+                 
+                  <mat-card-title>{{u.project.name}} </mat-card-title>
+                  <br>
+                  <mat-card-subtitle>Course: {{u.course.name}}</mat-card-subtitle>
+                  <mat-card-subtitle>Score :{{u.score}}</mat-card-subtitle>
+                  <mat-card-subtitle>Submitted Date :{{u.submittedOn | date}}</mat-card-subtitle>
+                  
+                     
+                  <!-- <mat-card-action><button  mat-raised-button color="accent" (click)=assessments(course.id)  >
+                    <span class="material-icons">create
+                     
+                    </span>Add Assessment</button>
+                </mat-card-action>
+               -->
+             
+              
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <p *ngIf="user_project_list.length == 0">Not available</p>

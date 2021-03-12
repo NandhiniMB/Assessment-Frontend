@@ -12,6 +12,7 @@ export class ProjectService {
   UPDATE_PROJECT ='/project';
   DELETE_PROJECT ='/project';
   SAVE_USER_PROJECT ='/userproject';
+  SAVE_USER_PROJECT_SCORE ='/userproject/score';
   GET_ALL_USER_PROJECTS ='/userproject';
 
   
@@ -39,5 +40,9 @@ export class ProjectService {
 
   public saveUserProject(userProject):Observable<any>{
     return this.http.post(this.SAVE_USER_PROJECT,userProject)
+  }
+
+  public saveUserProjectScore(userProject):Observable<any>{
+    return this.http.post(this.SAVE_USER_PROJECT_SCORE,userProject)
   }
 }

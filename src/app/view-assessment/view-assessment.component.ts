@@ -7,6 +7,8 @@ import { McqService } from '../services/mcq.service';
 import {ProjectService} from '../services/project.service';
 import {CreateProjectComponent} from '../create-project/create-project.component';
 import { SubmitProjectComponent } from '../submit-project/submit-project.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SnackbarComponent} from '../snackbar/snackbar.component';
 
 @Component({
   selector: 'app-view-assessment',
@@ -15,12 +17,11 @@ import { SubmitProjectComponent } from '../submit-project/submit-project.compone
 })
 export class ViewAssessmentComponent implements OnInit {
 
-  constructor(private mcqService: McqService,private projectService : ProjectService, private router:Router,private dialog:MatDialog) { }
+  constructor(private snackBar: MatSnackBar,private mcqService: McqService,private projectService : ProjectService, private router:Router,private dialog:MatDialog) { }
   mcq : Array<mcq>;
   projects :Array<Project>;
   ngOnInit(): void {
     this.mcqService.getMCQ().subscribe(resp => {
-
       this.mcq=resp;
       console.log(this.mcq);
     })
@@ -52,12 +53,24 @@ export class ViewAssessmentComponent implements OnInit {
 
   submitProject(project)
   {
-    this.dialog.open(SubmitProjectComponent,{
+    const dialogRef =this.dialog.open(SubmitProjectComponent,{
       width: '600px',
       height: '200px',
       data:{
         project:project
       }
     })
+
+
+    dialogRef.afterClosed().subscribe(() => {
+      // Do stuff after the dialog has closed
+    this.openSnackBar();
+  });
+  }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration:  5000,
+    });
   }
 }

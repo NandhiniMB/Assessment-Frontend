@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { UserProject } from '../models/UserProject';
 import { UserService } from '../services/user.service';
 import {ProjectService} from '../services/project.service';
+import { Course } from '../models/course';
 
 @Component({
   selector: 'app-submit-project',
@@ -18,6 +19,7 @@ export class SubmitProjectComponent implements OnInit {
   user:User;
   userProject : UserProject =new UserProject();
   file:File;
+  course:Course;
   constructor(@Inject(MAT_DIALOG_DATA) public obj,private projectService: ProjectService,private userService:UserService) {
    
    }
@@ -25,6 +27,7 @@ export class SubmitProjectComponent implements OnInit {
   ngOnInit(): void {
     this.project = this.obj.project;
     this.user = JSON.parse(this.userService.getUser());
+    this.course=this.obj.course;
   }
 
   onFileChanged(event){
@@ -34,20 +37,23 @@ export class SubmitProjectComponent implements OnInit {
 
   onUpload(){
     
-    
+    this.userProject.project =this.project;
+    this.userProject.user = this.user;
+    this.userProject.course = this.project.course;
+    console.log(this.userProject);
     const _formData = new FormData();
-    _formData.append('file',this.file, this.file.name);
-  // console.log("here"+JSON.stringify(_formData.get("name")))
+    _formData.append('file',this.file);
+    _formData.append('userProject',new Blob([JSON.stringify(this.userProject)],{type:"application/json"}));
 
-  console.log(_formData)
+
+  
   _formData.forEach((key,value)=>{
     console.log(key);
   })
-this.userProject.file=_formData;
-this.userProject.project =this.project;
-this.userProject.user = this.user;
-console.log(this.userProject);
-this.projectService.saveUserProject(this.userProject).subscribe(resp=>{
+
+
+
+this.projectService.saveUserProject(_formData).subscribe(resp=>{
   console.log(resp);
 })
   }

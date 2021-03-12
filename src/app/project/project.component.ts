@@ -5,7 +5,9 @@ import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
 import {MatDialog,MatDialogRef} from '@angular/material/dialog';
 import { CreateProjectComponent } from '../create-project/create-project.component';
- 
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SnackbarComponent} from '../snackbar/snackbar.component';
+
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -19,7 +21,7 @@ export class ProjectComponent implements OnInit {
   dataSource = this.projects;
   userId:Number;
 
-  constructor(private projectService:ProjectService,private userService:UserService,public dialog:MatDialog) { 
+  constructor(private snackBar: MatSnackBar,private projectService:ProjectService,private userService:UserService,public dialog:MatDialog) { 
    this.userId= JSON.parse(this.userService.getUser()).id;
   }
 
@@ -43,7 +45,7 @@ export class ProjectComponent implements OnInit {
       course:this.course,
       action:action}
 
-    this.dialog.open(CreateProjectComponent, {
+      const dialogRef =this.dialog.open(CreateProjectComponent, {
       width: '330px',
       height: '400px',
       data: {
@@ -51,6 +53,12 @@ export class ProjectComponent implements OnInit {
        course:this.course
       }
     });
+
+    dialogRef.afterClosed().subscribe(() => {
+      // Do stuff after the dialog has closed
+    this.openSnackBar();
+  });
+    
   }
   createProject(action,project){
 
@@ -67,5 +75,11 @@ export class ProjectComponent implements OnInit {
     this.projectService.deleteProject(projectId).subscribe(resp=>{
       console.log(resp);
     })
+  }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration:  5000,
+    });
   }
 }

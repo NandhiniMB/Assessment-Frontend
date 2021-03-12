@@ -42,6 +42,7 @@ import { ScoreComponent } from './score/score.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { SubmitProjectComponent } from './submit-project/submit-project.component';
 import { ParticipantComponent } from './participant/participant.component';
+import { SnackbarComponent } from './snackbar/snackbar.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { ParticipantComponent } from './participant/participant.component';
     ProjectComponent,
     CreateProjectComponent,
     SubmitProjectComponent,
-    ParticipantComponent
+    ParticipantComponent,
+    SnackbarComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { ProjectService } from '../services/project.service';
 import { UserService } from '../services/user.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Course } from '../models/course';
+import { UserProject } from '../models/UserProject';
 
 export interface DialogData {
   course:Course;
@@ -17,19 +18,13 @@ export interface DialogData {
 export class CreateProjectComponent implements OnInit {
 
  
+  userProject :UserProject;
   project:Project;
   course:Course;
   action:String;
   constructor(private projectService:ProjectService,private userService:UserService, 
      @Optional() @Inject(MAT_DIALOG_DATA) public obj) {
   
-      // console.log(obj);
-      // console.log(obj.obj);
-      // console.log({...obj});
-      // console.log(Object.keys(obj))
-
-    //var local={...obj}
-  //  console.log(this.obj);
    
     this.project=this.obj.project;
     console.log(this.project);
@@ -37,7 +32,7 @@ export class CreateProjectComponent implements OnInit {
      console.log(this.course);
     // this.action = this.obj.action;
     this.action=this.obj.action;
-
+this.userProject = this.obj.userProject;
    }
    
   
@@ -51,6 +46,13 @@ export class CreateProjectComponent implements OnInit {
     this.project.course=this.course;
     this.projectService.saveProject(this.project).subscribe(resp =>{
      console.log(resp);
+    })
+  }
+
+  saveUserProject(){
+    console.log(this.userProject);
+    this.projectService.saveUserProjectScore(this.userProject).subscribe(resp=>{
+      console.log(resp);
     })
   }
 }

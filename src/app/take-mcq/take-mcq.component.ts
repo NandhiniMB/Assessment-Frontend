@@ -6,7 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Question } from '../models/question';
 import { UserService } from '../services/user.service';
 import { UserMcq } from '../models/UserMcq';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SnackbarComponent} from '../snackbar/snackbar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-take-mcq',
@@ -22,7 +24,7 @@ export class TakeMcqComponent implements OnInit {
   mcq:mcq=new mcq();
   userId:Number;
   UserMcq : UserMcq=new UserMcq();
-  constructor(private mcqService: McqService,private route : ActivatedRoute,private formBuilder:FormBuilder,private userService:UserService) {
+  constructor(private router : Router, private snackBar: MatSnackBar,private mcqService: McqService,private route : ActivatedRoute,private formBuilder:FormBuilder,private userService:UserService) {
     
    }
 
@@ -74,6 +76,11 @@ export class TakeMcqComponent implements OnInit {
  console.log(resp);
     })
 
+   this.openSnackBar();
+    this.router.navigate(['\home']);
+
+
+
   }
 
   saveAnswer(ind){
@@ -84,6 +91,10 @@ export class TakeMcqComponent implements OnInit {
 
 
 
-
+openSnackBar() {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration:  5000,
+    });
+  }
 
 }

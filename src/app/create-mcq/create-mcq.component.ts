@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { ActivatedRoute, Router} from '@angular/router';
 import { Course } from '../models/course';
 import { mcq } from '../models/mcq';
 import { Question } from '../models/question';
 import { McqService } from '../services/mcq.service';
 import { UserService } from '../services/user.service';
+import {SnackbarComponent} from '../snackbar/snackbar.component';
 
 @Component({
   selector: 'app-create-mcq',
@@ -20,7 +22,7 @@ export class CreateMcqComponent implements OnInit {
   // option1:String;
   // option2:String;
   noOfQuestions:Number=10;
-  constructor(private formBuilder:FormBuilder,private mcqService:McqService,private userService:UserService,private route:ActivatedRoute) { }
+  constructor(private router : Router ,private snackBar: MatSnackBar,private formBuilder:FormBuilder,private mcqService:McqService,private userService:UserService,private route:ActivatedRoute) { }
   course:Course;
   ngOnInit(): void {
 
@@ -58,6 +60,8 @@ export class CreateMcqComponent implements OnInit {
     this.mcqObj.creator = JSON.parse(this.userService.getUser());
     this.mcqService.saveMCQ(this.questions,this.mcqObj).subscribe(resp=>{
     console.log(resp)
+    this.openSnackBar();
+    this.router.navigate(['/home/assessments',JSON.stringify(this.course)])
  },error => {
    console.log(error);
  })
@@ -69,4 +73,11 @@ export class CreateMcqComponent implements OnInit {
     console.log(event.value);
     this.noOfQuestions = Number(event.value)+1;
   }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration:  5000,
+    });
+  }
+
 }

@@ -7,22 +7,24 @@
         <h1>  Internal Portal</h1>
      
     
-        <span class="example-spacer"></span>
+        <span class="example-spacer"></span>  
+      
+        <div class="user_icon">
+          <mat-select-trigger>
+            <mat-icon>account_circle</mat-icon>
+            <mat-select>
+              <!-- <mat-option>{{user.name}}</mat-option> -->
+              <mat-option (click) = "logoutUser()">Log Out</mat-option>
+            </mat-select>
+          </mat-select-trigger>
+        </div>
         <!-- <div class = "notify_icon">
             <button mat-button  (click)="openNotificationDialog()">
                <mat-icon  [matBadge]="notifications_count" matBadgeColor="white" >circle_notifications</mat-icon>
               </button>
            
         </div> -->
-        <div class="user_icon">
-            <mat-select-trigger>
-              <mat-icon>account_circle</mat-icon>
-              <mat-select>
-                <!-- <mat-option>{{user.name}}</mat-option> -->
-                <mat-option (click) = "logoutUser()">Log Out</mat-option>
-              </mat-select>
-            </mat-select-trigger>
-          </div>
+       
       </mat-toolbar-row>
       </mat-toolbar>
     </div>
@@ -36,25 +38,24 @@
     
     <mat-nav-list class="list-container">
       <a mat-list-item routerLink="/home" routerLinkActive="active-link" (click)="sidenav.toggle()">
-        <!-- <span class="material-icons">Home</span> -->
+        <span class="material-icons">schedule</span>
         <a mat-list-item> Home </a>
       </a> 
     </mat-nav-list>
     <mat-nav-list class="list-container">
       <a mat-list-item [routerLink]="['/home/course']" (click)="sidenav.toggle()">
-        <!-- <span class="material-icons">Course</span> -->
+        <span class="material-icons">category</span> 
         <a mat-list-item >Course </a>
       </a> 
     </mat-nav-list>
-    <mat-nav-list class="list-container">
+    <!-- <mat-nav-list class="list-container">
       <a mat-list-item [routerLink]="['/home/grad']" (click)="sidenav.toggle()">
-        <!-- <span class="material-icons">Grads</span> -->
         <a mat-list-item >Grads</a>
       </a> 
-    </mat-nav-list>
+    </mat-nav-list> -->
      <mat-nav-list class="list-container">
       <a mat-list-item  [routerLink]="['/home/score']" (click)="sidenav.toggle()" routerLinkActive="active-link">
-        <span class="material-icons">score</span>
+        <span class="material-icons">star</span>
         <a mat-list-item > My Score Card </a>
       </a> 
     </mat-nav-list>

@@ -1,4 +1,5 @@
-<h1 md-dialog-title>Project <span style="float: right;  cursor: pointer;" mat-dialog-close class="material-icons">
+<div *ngIf="action!='userProjEdit'">
+  <h1 md-dialog-title>Project <span style="float: right;  cursor: pointer;" mat-dialog-close class="material-icons">
     close
     </span></h1>
 <div mat-dialog-content>
@@ -27,4 +28,33 @@
     <button mat-button mat-dialog-close (click)="saveProject()">Save</button>
   </div>
 </span>
+</div>
+
+<div *ngIf="action=='userProjEdit'">
+  <h1 md-dialog-title>Update Score <span style="float: right;  cursor: pointer;" mat-dialog-close class="material-icons">
+    close
+    </span></h1>
+    <div mat-dialog-content>
+      <form class="example-form">
+         
+              
+              <mat-form-field class="example-full-width">
+                  <mat-label>Name</mat-label>
+                  <input readonly matInput name ="name"  [(ngModel)]="userProject.user.name">
+                </mat-form-field>
+              
+                <br>
+                <br>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Score</mat-label>
+                  <input  matInput name ="score"  [(ngModel)]="userProject.score">
+                  
+                </mat-form-field>
+                <br>
+                <button color="primary" mat-raised-button mat-dialog-close (click)="saveUserProject()">Save</button>
+          
+        </form>
+  
+  </div>
+</div>
 
